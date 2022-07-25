@@ -147,12 +147,12 @@ function check_product()
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return
     fi
-    if (echo -n $1 | grep -q -e "^arrow_") ; then
-        ARROW_BUILD=$(echo -n $1 | sed -e 's/^arrow_//g')
+    if (echo -n $1 | grep -q -e "^atlantis_") ; then
+        ATLANTIS_BUILD=$(echo -n $1 | sed -e 's/^atlantis_//g')
     else
-        ARROW_BUILD=
+        ATLANTIS_BUILD=
     fi
-    export ARROW_BUILD
+    export ATLANTIS_BUILD
 
         TARGET_PRODUCT=$1 \
         TARGET_BUILD_VARIANT= \
@@ -708,13 +708,13 @@ function lunch()
         # if we can't find a product, try to grab it off the ArrowOS GitHub
         T=$(gettop)
         cd $T > /dev/null
-        vendor/arrow/build/tools/roomservice.py $product
+        vendor/atlantis/build/tools/roomservice.py $product
         cd - > /dev/null
         check_product $product
     else
         T=$(gettop)
         cd $T > /dev/null
-        vendor/arrow/build/tools/roomservice.py $product true
+        vendor/atlantis/build/tools/roomservice.py $product true
         cd - > /dev/null
     fi
 
@@ -1921,7 +1921,7 @@ export ANDROID_BUILD_TOP=$(gettop)
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/arrow/build/tools/repopick.py $@
+    $T/vendor/atlantis/build/tools/repopick.py $@
 }
 
 function arrow_prebuilts() {
